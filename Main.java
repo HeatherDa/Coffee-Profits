@@ -42,14 +42,21 @@ public class Main {
 
     public static void results() throws IOException {
         HashMap<String, ArrayList<Double>>drinkinfo=cups();
+        Double daytcost=0.0;
+        Double daytprice=0.0;
+        Double daytprofit=0.0;
         for (String item : drinkinfo.keySet()) {//item is String drink name
 
             ArrayList<Double> num=drinkinfo.get(item);
-            Double tcost=num.get(0)*num.get(2);
-            Double tprice=num.get(1)*num.get(2);
-            Double tprofit=tprice-tcost;
+            Double tcost=num.get(0)*num.get(2);//cost to produce
+            daytcost=daytcost+tcost;
+            Double tprice=num.get(1)*num.get(2);//price charged
+            daytprice=daytprice+tprice;
+            Double tprofit=tprice-tcost;//profit
+            daytprofit=daytprofit+tprofit;
             System.out.format(item+": Sold %.0f, Expenses $%.2f, Revenue $%.2f, Profit $%.2f \n", num.get(2), tcost, tprice, tprofit);
-            }
+        }
+        System.out.format("\n Totals for today: Expenses $%.2f, Revenue $%.2f, Profit$%.2f", daytcost, daytprice, daytprofit);
     }
 
 
