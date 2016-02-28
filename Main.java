@@ -48,8 +48,7 @@ public class Main {
             Double tcost=num.get(0)*num.get(2);
             Double tprice=num.get(1)*num.get(2);
             Double tprofit=tprice-tcost;
-            String total=String.format(item+": Sold "+num.get(2)+", Expenses $"+tcost+", Revenue $"+tprice+", Profit $"+tprofit);
-            System.out.println(total);
+            System.out.format(item+": Sold %.0f, Expenses $%.2f, Revenue $%.2f, Profit $%.2f \n", num.get(2), tcost, tprice, tprofit);
             }
     }
 
