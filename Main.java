@@ -19,7 +19,7 @@ public class Main {
         } catch (IOException ioe){
             System.out.println("could not read from coffee.txt");
         }
-        if(drinksold.isEmpty()){//trap an empty file
+        if(drinksold.isEmpty()){//inform user of an empty file
             System.out.println("The file is empty.");
         }
         Double num;
