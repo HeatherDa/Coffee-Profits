@@ -81,16 +81,6 @@ public class Main {
         bufReader.close();   //This closes the inner FileReader too
         return text;
     }
-    public static String writefile() throws IOException {//used this to create the coffee.txt file and copied the text into it, because it wouldn't work when I dragged it in like the instructions origianlly said to.
-        String filename="coffee.txt";
-        FileWriter writer = new FileWriter(filename);
-        BufferedWriter bufWriter = new BufferedWriter(writer);
 
-        bufWriter.write("\n");
-
-
-        bufWriter.close();
-        return filename;
-    }
 }
 
