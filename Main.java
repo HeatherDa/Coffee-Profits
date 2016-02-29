@@ -5,21 +5,22 @@ public class Main {
 
     static Scanner scandoub;
     public static void main(String[] args) throws IOException {
-        // write your code here
+        // prints name of program and calls function
         scandoub=new Scanner(System.in);
-        HashMap <String,ArrayList<Double>>drinkinfo=new HashMap<>();
-        //writefile();
         System.out.println("Coffee Shop Profit calculator program.");
-        //cups(drinkinfo);
-        //System.out.println(//string output of price here);
         results();
     }
     public static HashMap<String, ArrayList<Double>> cups() throws IOException {
         HashMap<String, ArrayList<Double>> drinksold = null;
         try {
             drinksold = readfile("coffee.txt");
-        } catch (FileNotFoundException ioe) {
+        } catch (FileNotFoundException fnfe) {
             System.out.println("sorry, that file does not exist.");
+        } catch (IOException ioe){
+            System.out.println("could not read from coffee.txt");
+        }
+        if(drinksold.isEmpty()){//trap an empty file
+            System.out.println("The file is empty.");
         }
         Double num;
         for (String drink : drinksold.keySet()) {
@@ -30,7 +31,7 @@ public class Main {
                 numarray.add(num); //add total sold to end of ArrayList
                 drinksold.put(drink, numarray);//add updated ArrayList to HashMap
             } catch (InputMismatchException ime) {
-                System.out.println("Please enter an integer.  For example: 1");
+                System.out.println("Please enter a number.");
                 break;
             }
 
@@ -56,10 +57,8 @@ public class Main {
             daytprofit=daytprofit+tprofit;
             System.out.format(item+": Sold %.0f, Expenses $%.2f, Revenue $%.2f, Profit $%.2f \n", num.get(2), tcost, tprice, tprofit);
         }
-        System.out.format("\n Totals for today: Expenses $%.2f, Revenue $%.2f, Profit$%.2f", daytcost, daytprice, daytprofit);
+        System.out.format("\nTotals for today: Expenses $%.2f, Revenue $%.2f, Profit$%.2f", daytcost, daytprice, daytprofit);
     }
-
-
 
     public static HashMap<String, ArrayList<Double>> readfile(String filename) throws IOException {
 
@@ -67,9 +66,10 @@ public class Main {
         BufferedReader bufReader = new BufferedReader(reader);
         String line = bufReader.readLine();
         HashMap<String, ArrayList<Double>> text=new HashMap<>();
+
         while (line != null) {
             String[] linetext = line.split(";");
-            String drink=linetext[0];
+            String drink=linetext[0];//name of beverage
             ArrayList<Double> doub=new ArrayList<>();
             doub.add(Double.parseDouble(linetext[1]));//cost to prepare beverage
             doub.add(Double.parseDouble(linetext[2]));//price to purchase beverage
@@ -77,10 +77,11 @@ public class Main {
             line = bufReader.readLine();
 
         }
+
         bufReader.close();   //This closes the inner FileReader too
         return text;
     }
-    public static String writefile() throws IOException {
+    public static String writefile() throws IOException {//used this to create the coffee.txt file and copied the text into it, because it wouldn't work when I dragged it in like the instructions origianlly said to.
         String filename="coffee.txt";
         FileWriter writer = new FileWriter(filename);
         BufferedWriter bufWriter = new BufferedWriter(writer);
